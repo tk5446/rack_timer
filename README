@@ -1,3 +1,9 @@
+UPDATE: Forked this and this version works on 3.2. Credit to jimneath. Going to change the following:
+Rack Timer -- Queuing time: 1723 microseconds
+
+
+
+
 Rack Timer provides timing output around each of your Rails rack-based middleware classes. It will log output to your Rails application log. Rack Timer has been tested with Rails 3.0.10, and it appears slightly incompatible with Rails 3.1.x.
 
 To use, simply add rack_timer to your Gemfile:
