@@ -6,7 +6,7 @@ module ActionDispatch
     class RackTimer
 
       # modify this environment variable to see more or less output
-      LogThreshold = ENV.has_key?('RACK_TIMER_LOG_THRESHOLD') ? ENV['RACK_TIMER_LOG_THRESHOLD'].to_f : 1.0 # millisecond
+      LogThreshold = ENV.has_key?('RACK_TIMER_LOG_THRESHOLD') ? ENV['RACK_TIMER_LOG_THRESHOLD'].to_f : 0.0 # millisecond
 
       def initialize(app)
         @app = app
@@ -31,6 +31,7 @@ module ActionDispatch
           # between Time.now from the start of the first piece of middleware
           # prefer HTTP_X_QUEUE_START over HTTP_X_REQUEST_START in case both exist
           queue_start_time = (env["HTTP_X_QUEUE_START"] || env["HTTP_X_REQUEST_START"]).gsub("t=", "").to_i
+          Rails.logger.info "Rack Timer -- Queuing time (from HTTP_X_REQUEST_START): #{(Time.now.to_f * 1000).to_i - queue_start_time} milliseconds"
           Rails.logger.info "Rack Timer -- Queuing time: #{(Time.now.to_f * 1000000).to_i - queue_start_time} microseconds"
         end
         env["MIDDLEWARE_TIMESTAMP"] = [@app.class.to_s, Time.now]
