@@ -32,7 +32,7 @@ module ActionDispatch
           # prefer HTTP_X_QUEUE_START over HTTP_X_REQUEST_START in case both exist
           queue_start_time = (env["HTTP_X_QUEUE_START"] || env["HTTP_X_REQUEST_START"]).gsub("t=", "").to_i
           Rails.logger.info "Rack Timer -- Queuing time (from HTTP_X_REQUEST_START): #{(Time.now.to_f * 1000).to_i - queue_start_time} milliseconds"
-          Rails.logger.info "Rack Timer -- Queuing time: #{(Time.now.to_f * 1000000).to_i - queue_start_time} microseconds"
+          # Rails.logger.info "Rack Timer -- Queuing time: #{(Time.now.to_f * 1000000).to_i - queue_start_time} microseconds"
         end
         env["MIDDLEWARE_TIMESTAMP"] = [@app.class.to_s, Time.now]
         env
