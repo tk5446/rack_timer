@@ -6,7 +6,7 @@ module ActionDispatch
     class RackTimer
 
       # modify this environment variable to see more or less output
-      LogThreshold = ENV.has_key?('RACK_TIMER_LOG_THRESHOLD') ? ENV['RACK_TIMER_LOG_THRESHOLD'].to_f : 0.0 # millisecond
+      LogThreshold = ENV.has_key?('RACK_TIMER_LOG_THRESHOLD') ? ENV['RACK_TIMER_LOG_THRESHOLD'].to_f : 200.0 # millisecond
 
       def initialize(app)
         @app = app
